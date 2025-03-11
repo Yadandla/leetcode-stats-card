@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hardLabel = document.getElementById('hard-label');
     const statsCards = document.querySelector('.stats-cards');
 
-    statsContainer.style.display = "none";
+    statsContainer.classList.add("display");
 
     // Return true or false based on regex
     const handleValidation = (username) => {
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchBtn.textContent = "searching...";
             searchBtn.disabled = true;
             statsContainer.classList.add("display");
-            document.getElementById('empty').innerHTML = '';
+
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchBtn.textContent = "search";
             searchBtn.disabled = false;
             statsContainer.classList.remove("display");
+            document.getElementById('empty').innerHTML = '';
         }
     }
 
@@ -64,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const progressDegree = (solved / total) * 100;
         circle.style.setProperty("--progress-degree", `${progressDegree}%`);
         label.textContent = `${solved}/${total}`;
-        statsContainer.style.display = "block";
     }
 
     // Accessing the API properties and there values to display in UI
