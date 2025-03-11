@@ -17,13 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Return true or false based on regex
     const handleValidation = (username) => {
         if (username.trim() === "") {
-            alert('Username should not be empty');
+            // alert('Username should not be empty');
+            document.getElementById('empty').innerHTML = 'Username should not be empty';
             return false;
         }
         const regex = /^[a-zA-Z0-9_-]{1,15}$/;
         const isMatching = regex.test(username);
         if (!isMatching) {
-            alert('Invalid username');
+            // alert('Invalid username');
+            document.getElementById('empty').innerHTML = "Invalid Username"
         }
         return isMatching;
     }
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchBtn.textContent = "searching...";
             searchBtn.disabled = true;
             statsContainer.classList.add("display");
+            document.getElementById('empty').innerHTML = '';
 
             const response = await fetch(url);
             if (!response.ok) {
@@ -89,8 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         statsCards.innerHTML = cardData.map((card) => {
             return `
                <div class='card'>
-               <h3>${card.label}</h3>
-               <p>${card.value}</p>
+               <h3>${card.label} : <span>${card.value}</span></h3>
                </div>
                `
         }).join("");
