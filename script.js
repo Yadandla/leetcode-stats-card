@@ -1,8 +1,9 @@
-// once the DOM content is loaded, then perform logic inside the function
+// Once the DOM content is loaded, then perform or execute logic inside the function
 document.addEventListener('DOMContentLoaded', () => {
 
     const usernameInput = document.getElementById('user-input');
     const searchBtn = document.getElementById('search');
+    const userContainer = document.querySelector('.user-container');
     const statsContainer = document.querySelector('.stats-container');
     const easyProgress = document.querySelector('.easy-progress');
     const mediumProgress = document.querySelector('.medium-progress');
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('empty').innerHTML = 'Username should not be empty';
             return false;
         }
-        const regex = /^[a-zA-Z0-9_-]{1,15}$/;
+        const regex = /^[a-zA-Z0-9][a-zA-Z0-9_-]{2,14}[a-zA-Z0-9]$/;
         const isMatching = regex.test(username);
         if (!isMatching) {
             // alert('Invalid username');
@@ -33,18 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchUserDetails(username) {
         const url = `https://leetcode-stats-api.herokuapp.com/${username}`;
         try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Unable to fetch the user details');
+            }
+            const data = await response.json();
+            // console.log('logging data: ', data);
 
             searchBtn.textContent = "searching...";
             searchBtn.disabled = true;
             statsContainer.classList.add("display");
-
-
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('unable to ftech the user details');
-            }
-            const data = await response.json();
-            // console.log('logging data: ', data);
 
             displayUserData(data);
         }
