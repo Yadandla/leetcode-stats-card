@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const usernameInput = document.getElementById('user-input');
     const searchBtn = document.getElementById('search');
-    const userContainer = document.querySelector('.user-container');
     const statsContainer = document.querySelector('.stats-container');
     const easyProgress = document.querySelector('.easy-progress');
     const mediumProgress = document.querySelector('.medium-progress');
